@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="branham.joel.CircleModelTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2017-09-14T01:18:59" hostname="Joel" time="0.003">
+  <properties/>
+  <testcase name="setUpperLeftX" classname="branham.joel.CircleModelTest" time="0.0"/>
+  <testcase name="setUpperLeftY" classname="branham.joel.CircleModelTest" time="0.0"/>
+  <testcase name="testGetUpperLeftX" classname="branham.joel.CircleModelTest" time="0.0"/>
+  <testcase name="testGetUpperLeftY" classname="branham.joel.CircleModelTest" time="0.0"/>
+  <testcase name="testDefaultColor" classname="branham.joel.CircleModelTest" time="0.0"/>
+  <testcase name="testGetCenterX" classname="branham.joel.CircleModelTest" time="0.0"/>
+  <testcase name="testGetCenterY" classname="branham.joel.CircleModelTest" time="0.0"/>
+  <testcase name="testGetRadius" classname="branham.joel.CircleModelTest" time="0.001"/>
+  <testcase name="testSetColor" classname="branham.joel.CircleModelTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

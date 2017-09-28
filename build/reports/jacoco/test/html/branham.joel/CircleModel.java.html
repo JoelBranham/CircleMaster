@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CircleModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CircleMaster</a> &gt; <a href="index.source.html" class="el_package">branham.joel</a> &gt; <span class="el_source">CircleModel.java</span></div><h1>CircleModel.java</h1><pre class="source lang-java linenums">package branham.joel;
+
+import java.awt.*;
+
+/**
+ * A model for each circle with radius, color, and relevant coordinates.
+ */
+public class CircleModel{
+
+	/**
+	 * The radius of the circle.
+	 */
+	private int radius;
+
+	/**
+	 * The fill color of the circle. Colors are given an alpha value of 127 which gives them 50% transparency. This ensures that overlapping circles are still visible.
+	 */
+	private Color color;
+
+	/**
+	 * The x and y coordinates of the center of the circle.
+	 */
+	private double centerX, centerY;
+
+	/**
+	 * The x and y coordinates of the upper-left corner of the circle.
+	 */
+	private double upperLeftX, upperLeftY;
+
+	/**
+	 * The coordinates for the center of the circle are calculated based off of the radius and upper-left bound coordinates.
+	 * @param radius The circle's radius.
+	 * @param upperLeftX The x-coordinate of the upper-left corner a square encompassing the circle.
+	 * @param upperLeftY The y-coordinate of the upper-left corner of a square encompassing the circle.
+	 */
+<span class="fc" id="L36">	public CircleModel(int radius, double upperLeftX, double upperLeftY){</span>
+<span class="fc" id="L37">		this.radius = radius;</span>
+<span class="fc" id="L38">		this.color = new Color(0,0,0, 127);</span>
+
+<span class="fc" id="L40">		this.upperLeftX = upperLeftX;</span>
+<span class="fc" id="L41">		this.upperLeftY = upperLeftY;</span>
+
+<span class="fc" id="L43">		this.centerX = upperLeftX + radius;</span>
+<span class="fc" id="L44">		this.centerY = upperLeftY + radius;</span>
+<span class="fc" id="L45">	}</span>
+
+	/**
+	 * Sets the filled color of the circle.
+	 * @param c The fill color to be set.
+	 */
+	public void setColor(Color c){
+<span class="fc" id="L52">		this.color = c;</span>
+<span class="fc" id="L53">	}</span>
+
+	/**
+	 * Sets the x-coordinate of the upper-left corner of the circle.
+	 * @param x The x-coordinate of the upper-left corner of the circle.
+	 */
+	public void setUpperLeftX(double x){
+<span class="fc" id="L60">		this.upperLeftX = x;</span>
+<span class="fc" id="L61">		this.centerX = upperLeftX + radius;</span>
+<span class="fc" id="L62">	}</span>
+
+	/**
+	 * Sets the y-coordinate of the upper-left corner of the circle.
+	 * @param y The y-coordinate of the upper-left corner of the circle.
+	 */
+	public void setUpperLeftY(double y){
+<span class="fc" id="L69">		this.upperLeftY = y;</span>
+<span class="fc" id="L70">		this.centerY = upperLeftY + radius;</span>
+<span class="fc" id="L71">	}</span>
+
+	/**
+	 * Returns the circle's filled color.
+	 * @return Color
+	 */
+	public Color getColor(){
+<span class="fc" id="L78">		return this.color;</span>
+	}
+
+	/**
+	 * Returns the circle's radius.
+	 * @return integer
+	 */
+	public int getRadius(){
+<span class="fc" id="L86">		return this.radius;</span>
+	}
+
+	/**
+	 * Returns the x-coordinate of the circle's upper-left bound.
+	 * @return integer
+	 */
+	public double getUpperLeftX(){
+<span class="fc" id="L94">		return this.upperLeftX;</span>
+	}
+
+	/**
+	 * Returns the y-coordinate of the circle's upper-left bound.
+	 * @return double
+	 */
+	public double getUpperLeftY(){
+<span class="fc" id="L102">		return this.upperLeftY;</span>
+	}
+
+	/**
+	 * Returns the x-coordinate of the circle's center.
+	 * @return double
+	 */
+<span class="fc" id="L109">	public double getCenterX(){ return this.centerX; }</span>
+
+	/**
+	 * Returns the y-coordinate of the circle's center.
+	 * @return double
+	 */
+<span class="fc" id="L115">	public double getCenterY(){ return this.centerY; }</span>
+		
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

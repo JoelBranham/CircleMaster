@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CircleCanvas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CircleMaster</a> &gt; <a href="index.source.html" class="el_package">branham.joel</a> &gt; <span class="el_source">CircleCanvas.java</span></div><h1>CircleCanvas.java</h1><pre class="source lang-java linenums">package branham.joel;
+
+import java.awt.*;
+import javax.swing.*;
+
+/**
+ * JPanel on which circles are drawn.
+ */
+public class CircleCanvas extends JPanel {
+
+	private CircleManager circleManager;
+
+	/**
+	 * @param circleManager Used to access CircleModels and reset them.
+	 */
+<span class="fc" id="L16">	public CircleCanvas(CircleManager circleManager) {</span>
+<span class="fc" id="L17">		this.circleManager = circleManager;</span>
+<span class="fc" id="L18">	}</span>
+
+	/**
+	 * Draws Circles on CircleCanvas. For every CircleModel in circleModelArray, the outline of a circle (technically an oval with
+	 * uniform height and width) whose height/width is determined by the CircleModel's radius is drawn in gray. This same shape is then filled
+	 * with its CircleModel's corresponding color.
+	 * @param g Graphics
+	 */
+	public void drawCircles(Graphics g) {
+<span class="fc" id="L27">		Graphics2D g2d = (Graphics2D) g;</span>
+<span class="fc" id="L28">		CircleModel[] circleModelArray = circleManager.getCircleArray();</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">		for (int i = 0; i &lt; circleModelArray.length; i++) {</span>
+<span class="fc" id="L30">			g.setColor(Color.gray);</span>
+<span class="fc" id="L31">			((Graphics2D) g).setStroke(new BasicStroke(3));</span>
+<span class="fc" id="L32">			g.drawOval((int) circleModelArray[i].getUpperLeftX(), (int) circleModelArray[i].getUpperLeftY(),</span>
+<span class="fc" id="L33">					circleModelArray[i].getRadius() * 2, circleModelArray[i].getRadius() * 2);</span>
+<span class="fc" id="L34">			g.setColor(circleModelArray[i].getColor());</span>
+<span class="fc" id="L35">			g.fillOval((int) circleModelArray[i].getUpperLeftX(), (int) circleModelArray[i].getUpperLeftY(),</span>
+<span class="fc" id="L36">					circleModelArray[i].getRadius() * 2, circleModelArray[i].getRadius() * 2);</span>
+		}
+<span class="nc" id="L38">	}</span>
+
+	/**
+	 * Prompts the CircleManager object to create new circles. Repaint() calls paintComponent().
+	 */
+	public void drawNewCircles(){
+<span class="fc" id="L44">		circleManager.createNewCircles();</span>
+<span class="fc" id="L45">		repaint();</span>
+<span class="fc" id="L46">	}</span>
+
+	/**
+	 * Prompts the circles to be drawn by calling drawCircles().
+	 * @param g Graphics
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
+<span class="fc" id="L54">		super.paintComponent(g);</span>
+<span class="nc" id="L55">		drawCircles(g);</span>
+<span class="nc" id="L56">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

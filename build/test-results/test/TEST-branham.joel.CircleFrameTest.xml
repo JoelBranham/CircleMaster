@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="branham.joel.CircleFrameTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-09-14T01:18:59" hostname="Joel" time="0.117">
+  <properties/>
+  <testcase name="testMainWithExpectNumberButIncorrectArgsCausesCommandLineOutput" classname="branham.joel.CircleFrameTest" time="0.029"/>
+  <testcase name="testMainWithExpectedNumberArgsDoesNotThrowException" classname="branham.joel.CircleFrameTest" time="0.086"/>
+  <testcase name="testMainWithIncorrectNumberArgsCausesCommandLineOutput" classname="branham.joel.CircleFrameTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

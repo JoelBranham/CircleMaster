@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CircleFrame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CircleMaster</a> &gt; <a href="index.source.html" class="el_package">branham.joel</a> &gt; <span class="el_source">CircleFrame.java</span></div><h1>CircleFrame.java</h1><pre class="source lang-java linenums">package branham.joel;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Random;
+import javax.swing.*;
+
+/**
+ * JFrame in which the CircleCanvas resides. Also supports option menu.
+ */
+public class CircleFrame extends JFrame implements ActionListener{
+
+    private CircleCanvas circleCanvas;
+
+    private JMenuBar menuBar;
+    private JMenu optionMenu;
+    private JMenuItem drawNewCircles;
+    private JMenuItem openJavaDoc;
+    private JMenuItem openJacocoTestReport;
+
+    /**
+     * Menu and its associated items are initialized, given ActionListeners, and added to the JFrame. CircleCanvas is added to the frame as well.
+     * @param circleCanvas CircleCanvas object provided so &quot;Draw New Circles&quot; menu item can call resetCircles().
+     */
+<span class="fc" id="L27">    public CircleFrame(CircleCanvas circleCanvas){</span>
+<span class="fc" id="L28">        menuBar = new JMenuBar();</span>
+<span class="fc" id="L29">        optionMenu = new JMenu(&quot;Options&quot;);</span>
+<span class="fc" id="L30">        drawNewCircles = new JMenuItem(&quot;Draw New Circles&quot;);</span>
+<span class="fc" id="L31">        drawNewCircles.addActionListener(this);</span>
+<span class="fc" id="L32">        optionMenu.add(drawNewCircles);</span>
+<span class="fc" id="L33">        openJavaDoc = new JMenuItem(&quot;Open Documentation&quot;);</span>
+<span class="fc" id="L34">        openJavaDoc.addActionListener(this);</span>
+<span class="fc" id="L35">        optionMenu.add(openJavaDoc);</span>
+<span class="fc" id="L36">        openJacocoTestReport = new JMenuItem(&quot;Open Coverage Report&quot;);</span>
+<span class="fc" id="L37">        openJacocoTestReport.addActionListener(this);</span>
+<span class="fc" id="L38">        optionMenu.add(openJacocoTestReport);</span>
+<span class="fc" id="L39">        menuBar.add(optionMenu);</span>
+<span class="fc" id="L40">        setJMenuBar(menuBar);</span>
+
+<span class="fc" id="L42">        this.circleCanvas = circleCanvas;</span>
+<span class="fc" id="L43">        add(circleCanvas);</span>
+
+<span class="fc" id="L45">        setTitle(&quot;Circle Master&quot;);</span>
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * If resetCircles JMenuItem is selected, resetCircles() is called in CircleCanvas to redraw circles.
+     * If openJavaDoc or openJacocoTestReport are selected, their associated html file is opened in desktop's default web
+     * browser.
+     * @param event Event that is triggered by interacting with an object with an ActionListener. In this case, an event is fired
+     * when one of the menu options is clicked.
+     */
+    public void actionPerformed(ActionEvent event){
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (drawNewCircles == event.getSource()){</span>
+<span class="nc" id="L57">            circleCanvas.drawNewCircles();</span>
+        }
+        else{
+<span class="fc" id="L60">            String url = &quot;&quot;;</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">            if (openJavaDoc == event.getSource()){</span>
+<span class="nc" id="L62">                url = &quot;build\\docs\\javadoc\\index.html&quot;;</span>
+            }
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            else if (openJacocoTestReport == event.getSource()){</span>
+<span class="nc" id="L65">                url = &quot;build\\reports\\jacoco\\test\\html\\index.html&quot;;</span>
+            }
+<span class="fc" id="L67">            File htmlFile = new File(url);</span>
+            try{
+<span class="fc" id="L69">                Desktop.getDesktop().browse(htmlFile.toURI());</span>
+            }
+<span class="nc" id="L71">            catch (Exception ex) {</span>
+<span class="nc" id="L72">                System.out.println(&quot;File not found at &quot; + url);</span>
+<span class="fc" id="L73">            }</span>
+        }
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Drives the application. A CircleManager is created whose numCircles argument is determined by command line input. The
+     * windowWidth and windowHeight arguments are slightly adjusted to account for the specifics of the application window.
+     * A CircleFrame is created whose dimensions are provided by the second and third command line input.
+     * @param args Command line input. First argument specifies the number of circles. Second and third arguments provide
+     * the width and height of the CircleFrame. If the number of args is incorect or if one argument does not yield an integer,
+     * a NumberFormatException is thrown which triggers console output &quot;Invalid command-line inputs&quot;.
+     */
+    public static void main(String[] args){
+        try{
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            if (args.length == 3) {</span>
+<span class="fc" id="L88">                int windowWidth = Integer.parseInt(args[1]), windowHeight = Integer.parseInt(args[2]);</span>
+<span class="fc" id="L89">                CircleManager circleManager = new CircleManager(Integer.parseInt(args[0]), windowWidth - 16, windowHeight - 65, new Random());</span>
+<span class="fc" id="L90">                CircleFrame circleFrame = new CircleFrame(new CircleCanvas(circleManager));</span>
+<span class="fc" id="L91">                circleFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="fc" id="L92">                circleFrame.setSize(windowWidth, windowHeight);</span>
+<span class="fc" id="L93">                circleFrame.setVisible(true);</span>
+<span class="fc" id="L94">            }</span>
+            else{
+<span class="fc" id="L96">                throw new NumberFormatException();</span>
+            }
+        }
+<span class="fc" id="L99">        catch(NumberFormatException ne){</span>
+<span class="fc" id="L100">            System.out.print(&quot;Invalid command-line input(s).&quot;);</span>
+<span class="fc" id="L101">        }</span>
+<span class="fc" id="L102">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
